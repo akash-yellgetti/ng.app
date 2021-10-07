@@ -25,3 +25,44 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+ng new ng-app-project --style=scss --routing=true
+
+----------------------------------------------------
+ng g m shared --module=app --routing=true
+----------------------------------------------------
+
+ng g m shared/modules/layout --module=app --routing=true
+ng generate @angular/material:navigation shared/modules/layout/main
+ng generate @angular/material:dashboard shared/modules/layout/dashboard
+ng generate @angular/material:tree shared/modules/layout/sidenav
+
+----------------------------------------------------
+
+ng g m shared/modules/material --module=app
+ng g m shared/modules/admin --module=app --routing=true
+
+ng g c shared/modules/admin/user
+
+
+
+ng g m shared/modules/auth --module=app --routing=true
+ng g m shared/modules/communication --module=app --routing=true
+ng g m shared/modules/accounts --module=app --routing=true
+ng g m shared/modules/material --module=app --routing=true
+ng g m shared/modules/tracker --module=app --routing=true
+ng g m shared/modules/FormBuilder --module=app --routing=true
+
+----------------------------------------------------
+
+ng g c shared/components/datatable
+ng g c shared/components/search
+
+----------------------------------------------------
+
+ng g m modules/pathology --module=app --routing=true
+ng g m modules/market --module=app --routing=true
+
+
+----------------------------------------------------
