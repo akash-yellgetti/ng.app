@@ -1,1 +1,22 @@
-<p>user works!</p>
+<div class="grid-container">
+    <h1 class="mat-h1">user works!</h1>
+    <mat-card>
+        <app-datatable 
+            [id]="dashboard.intradayDatatable.id" 
+            [options]="dashboard.intradayDatatable.options" 
+            (instance)="intradayDatatableEvt($event)">
+        </app-datatable>
+    </mat-card>
+    <!-- <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Intraday</div>
+          <div class="panel-body">
+              <app-datatable 
+              [id]="dashboard.intradayDatatable.id" 
+              [options]="dashboard.intradayDatatable.options" 
+              (instance)="intradayDatatableEvt($event)">
+            </app-datatable>
+          </div>
+        </div>
+      </div> -->
+</div>

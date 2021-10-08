@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { UserComponent } from './user/user.component';
 import { RbacComponent } from './rbac/rbac.component';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../../shared.module';
 
 
 @NgModule({
@@ -13,6 +15,8 @@ import { RbacComponent } from './rbac/rbac.component';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    SharedModule,
     AdminRoutingModule
   ]
 })

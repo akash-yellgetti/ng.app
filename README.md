@@ -42,11 +42,12 @@ ng generate @angular/material:tree shared/modules/layout/sidenav
 
 ng g m shared/modules/material --module=app
 
-
+ng g s shared/core/services/common/subject/subject
 
 ng g m shared/modules/auth --module=app --routing=true
 ng g c shared/modules/auth/login
 ng g c shared/modules/auth/register
+
 
 
 ng g m shared/modules/admin --module=app --routing=true
@@ -55,9 +56,11 @@ ng g c shared/modules/admin/rbac
 
 
 ng g m shared/modules/FormBuilder --module=app --routing=true
-ng g c shared/modules/FormBuilder/Form
-ng g c shared/modules/FormBuilder/Field
-ng g c shared/modules/FormBuilder/Builder
+ng g c shared/modules/form-builder/Form
+ng g c shared/modules/form-builder/Field
+ng g c shared/modules/form-builder/Builder
+
+
 
 
 ng g m shared/modules/accounts --module=app --routing=true
