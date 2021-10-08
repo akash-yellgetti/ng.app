@@ -14,8 +14,8 @@ export const files = [
     name: 'Admin',
     type: 'folder',
     children: [
-      { name: 'User', type: 'file' },
-      { name: 'RBAC', type: 'file' },
+      { name: 'User', type: 'file', url: 'main/admin/user' },
+      { name: 'RBAC', type: 'file', url: 'main/admin/rbac' },
       { name: 'Menu', type: 'file' },
       { name: 'Constant', type: 'file' },
     ]

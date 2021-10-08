@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-main',
@@ -16,6 +17,11 @@ export class MainComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private SpinnerService: NgxSpinnerService) { 
+    this.SpinnerService.show();
+    setTimeout(()=>{                           //<<<---using ()=> syntax
+      this.SpinnerService.hide();
+    }, 3000);
+  }  
 
 }

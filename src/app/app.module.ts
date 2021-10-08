@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { AdminModule } from './shared/modules/admin/admin.module';

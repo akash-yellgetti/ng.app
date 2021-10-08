@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxSpinnerModule } from "ngx-spinner";  
 import { LayoutRoutingModule } from './layout-routing.module';
 import { MainComponent } from './main/main.component';
 import { MaterialModule } from '../material/material.module';
@@ -29,9 +29,10 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MaterialModule,
     LayoutRoutingModule,
-    MatTreeModule,
-    MatIconModule,
-    MatButtonModule,
+    NgxSpinnerModule
+    // MatTreeModule,
+    // MatIconModule,
+    // MatButtonModule,
     // MatGridListModule,
     // MatCardModule,
     // MatMenuModule,

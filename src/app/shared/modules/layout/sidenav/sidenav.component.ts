@@ -7,6 +7,7 @@ import { files } from './example-data';
 export interface FileNode {
   name: string;
   type: string;
+  url?: string;
   children?: FileNode[];
 }
 
@@ -18,6 +19,7 @@ export interface FlatTreeNode {
   name: string;
   type: string;
   level: number;
+  url?: string;
   expandable: boolean;
 }
 
@@ -54,6 +56,7 @@ export class SidenavComponent {
     return {
       name: node.name,
       type: node.type,
+      url: node.url,
       level,
       expandable: !!node.children
     };

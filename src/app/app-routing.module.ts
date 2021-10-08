@@ -5,20 +5,23 @@ import { MainComponent } from './shared/modules/layout/main/main.component';
 
 const routes: Routes = [
     {
-      path: '', redirectTo: 'main', pathMatch: 'full'
+      path: '', redirectTo: 'main/dashboard', pathMatch: 'full'
     },
     {
       path: 'main',
-      component: DashboardComponent
-      // children: [
-      //   {
-      //     path: 'admin',
-      //     loadChildren: () => import('./shared/modules/admin/admin.module').then(mod => mod.AdminModule)
-      //   }
-      // ]
+      children: [
+        {
+          path: 'dashboard',
+          component: DashboardComponent
+        },
+        {
+          path: 'admin',
+          loadChildren: () => import('./shared/modules/admin/admin.module').then(mod => mod.AdminModule)
+        }
+      ]
     },
     { 
-      path: '**', redirectTo: 'main', pathMatch: 'full'
+      path: '**', redirectTo: 'main/dashboard', pathMatch: 'full'
     },
 ];
 

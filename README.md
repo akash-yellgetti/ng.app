@@ -41,18 +41,39 @@ ng generate @angular/material:tree shared/modules/layout/sidenav
 ----------------------------------------------------
 
 ng g m shared/modules/material --module=app
-ng g m shared/modules/admin --module=app --routing=true
-
-ng g c shared/modules/admin/user
 
 
 
 ng g m shared/modules/auth --module=app --routing=true
-ng g m shared/modules/communication --module=app --routing=true
-ng g m shared/modules/accounts --module=app --routing=true
-ng g m shared/modules/material --module=app --routing=true
-ng g m shared/modules/tracker --module=app --routing=true
+ng g c shared/modules/auth/login
+ng g c shared/modules/auth/register
+
+
+ng g m shared/modules/admin --module=app --routing=true
+ng g c shared/modules/admin/user
+ng g c shared/modules/admin/rbac
+
+
 ng g m shared/modules/FormBuilder --module=app --routing=true
+ng g c shared/modules/FormBuilder/Form
+ng g c shared/modules/FormBuilder/Field
+ng g c shared/modules/FormBuilder/Builder
+
+
+ng g m shared/modules/accounts --module=app --routing=true
+ng g c shared/modules/accounts/ledger
+ng g c shared/modules/accounts/voucher
+
+
+ng g m shared/modules/communication --module=app --routing=true
+ng g c shared/modules/communication/email
+
+ng g m shared/modules/tracker --module=app --routing=true
+ng g c shared/modules/tracker/visitor
+
+ng g m shared/modules/material --module=app --routing=true
+
+
 
 ----------------------------------------------------
 

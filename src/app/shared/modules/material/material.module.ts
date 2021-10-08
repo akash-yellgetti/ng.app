@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from "ngx-spinner";  
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -47,6 +49,8 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [],
   imports: [
     CommonModule,
+    HttpClientModule,
+    NgxSpinnerModule,
     LayoutModule,
     MatAutocompleteModule,
     MatCheckboxModule,
