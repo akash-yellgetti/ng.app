@@ -88,5 +88,8 @@ ng g c shared/components/search
 ng g m modules/pathology --module=app --routing=true
 ng g m modules/market --module=app --routing=true
 
+ng g c modules/market/components/index --module=market
+ng g c modules/market/components/stock --module=market
 
+ng g s modules/market/core/services/api/market/market --module=market
 ----------------------------------------------------

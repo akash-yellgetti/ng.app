@@ -157,6 +157,8 @@ export const IndexDashboard = {
                     return data;
                 }
             },
+            searching: false,
+            lengthChange: false,
             pageLength: 10,
             processing: true,
             columns: [

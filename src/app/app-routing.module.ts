@@ -15,6 +15,10 @@ const routes: Routes = [
           component: DashboardComponent
         },
         {
+          path: 'market',
+          loadChildren: () => import('./modules/market/market.module').then(mod => mod.MarketModule)
+        },
+        {
           path: 'admin',
           loadChildren: () => import('./shared/modules/admin/admin.module').then(mod => mod.AdminModule)
         }

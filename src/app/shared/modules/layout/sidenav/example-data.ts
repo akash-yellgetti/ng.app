@@ -62,6 +62,14 @@ export const files = [
     ]
   },
   {
+    name: 'Market',
+    type: 'folder',
+    children: [
+      { name: 'Index', type: 'file', url: 'main/market/index' },
+      { name: 'Stock', type: 'file', url: 'main/market/stock' },
+    ]
+  },
+  {
     name: 'Pathology',
     type: 'folder',
     children: [

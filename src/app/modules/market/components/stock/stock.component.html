@@ -1,0 +1,10 @@
+<div class="grid-container">
+    <h1 class="mat-h1">Stock</h1>
+    <mat-card>
+        <app-datatable 
+            [id]="stock.listDatatable.id" 
+            [options]="stock.listDatatable.options" 
+            (instance)="listDatatableEvt($event)">
+        </app-datatable>
+    </mat-card>
+</div>
