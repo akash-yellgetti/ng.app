@@ -22,6 +22,17 @@ export class MarketService {
         catchError((err) => this.handleError(err, 'Failed to search.')));
   }
 
+  indexInfo(detailId: string): Observable<any> {
+    
+    const url = 'https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/'+encodeURIComponent(detailId);
+    const headers = new HttpHeaders({
+    });
+    const options = { headers: headers };
+    return this.http.get(url, options)
+      .pipe(map((data) => data),
+        catchError((err) => this.handleError(err, 'Failed to fetch information.')));
+  }
+
   info(sc_did: string): Observable<any> {
     
     const url = 'https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+sc_did;
@@ -89,18 +100,10 @@ export class MarketService {
         catchError((err) => this.handleError(err, 'Failed to fetch information.')));
   }
 
-  callOptions(symbol: string, duration: string, from: string, to: string): Observable<any> {
-    const url = 'https://appfeeds.moneycontrol.com/jsonapi/fno/overview&format=json&inst_type=options&option_type=CE&id=NIFTY&ExpiryDate=2021-09-16';
-    const headers = new HttpHeaders({
-    });
-    const options = { headers: headers };
-    return this.http.get(url, options)
-      .pipe(map((data) => data),
-        catchError((err) => this.handleError(err, 'Failed to fetch information.')));
-  }
+  
 
-  putOptions(symbol: string, duration: string, from: string, to: string): Observable<any> {
-    const url = 'https://appfeeds.moneycontrol.com/jsonapi/fno/overview&format=json&inst_type=options&option_type=PE&id=NIFTY&ExpiryDate=2021-09-16';
+  furtureOptions(id: string, type: string, expiryDate: string): Observable<any> {
+    const url = 'https://appfeeds.moneycontrol.com/jsonapi/fno/overview&format=json&inst_type=options&option_type='+type+'&id='+id+'&ExpiryDate='+expiryDate;
     const headers = new HttpHeaders({
     });
     const options = { headers: headers };

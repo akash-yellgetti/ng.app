@@ -1,7 +1,43 @@
 import * as _ from 'lodash';
 
+
+const optionDatatableSettings = {
+    table: {},
+    options: {
+        responsive: true,
+        data: [],
+        columns: [
+            // { "data": "fno_exp", "title": "fno_exp" },
+            { "data": "strikeprice", "title": "strikeprice" },
+            { "data": "lastvalue", "title": "lastvalue" },
+            { "data": "percentchange", "title": "percentchange" },
+            { "data": "direction", "title": "direction" },
+            { "data": "oi_change", "title": "oi_change" },
+            { "data": "oi_percchg", "title": "oi_percchg" },
+            // { "data": "last_traded_date", "title": "last_traded_date" },
+            { "data": "volume", "title": "volume" }
+        ]
+    }
+}
+
 export const Market = {
     index: {
+        otmCallDatatable: {
+            ...optionDatatableSettings,
+            id: "otmCallDatatable",
+        },
+        itmCallDatatable: {
+            ...optionDatatableSettings,
+            id: "itmCallDatatable",
+        },
+        otmPutDatatable: {
+            ...optionDatatableSettings,
+            id: "otmPutDatatable",
+        },
+        itmPutDatatable: {
+            ...optionDatatableSettings,
+            id: "itmPutDatatable",
+        },
         listDatatable: {
             id: "listDatatable",
             table: {},
@@ -24,8 +60,8 @@ export const Market = {
                 processing: true,
                 columns: [
                     { "data": "id", "title": "ID" },
+                    { "data": "name", "title": "Name" },
                     { "data": "url", "title": "Url" },
-                    { "data": "name", "title": "Name" }
                 ]
             },
         }
@@ -61,11 +97,11 @@ export const Market = {
                     { "data": "companyName", "title": "Company Name" },
                     { "data": "sc_id", "title": "ID" },
                     { "data": "sc_sector", "title": "sc_sector" }
-                    
+
                 ],
-                "initComplete": function(settings: any, json: any) {
+                "initComplete": function (settings: any, json: any) {
                     // alert( 'DataTables has finished its initialisation.' );
-                  }
+                }
             },
         }
     }

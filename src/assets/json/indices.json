@@ -3,7 +3,14 @@
     {
       "id": "9",
       "url": "https://www.moneycontrol.com/markets/indian-indices/top-nse-50-companies-list/9?classic=true",
+      "detailId": "in;NSX",
       "name": "NIFTY 50"
+    },
+    {
+      "id": "23",
+      "url": "https://www.moneycontrol.com/markets/indian-indices/top-nsebank-companies-list/23?classic=true",
+      "detailId": "in;nbx",
+      "name": "NIFTY BANK"
     },
     {
       "id": "6",
@@ -34,11 +41,6 @@
       "id": "52",
       "url": "https://www.moneycontrol.com/markets/indian-indices/top-nseauto-companies-list/52?classic=true",
       "name": "NIFTY AUTO"
-    },
-    {
-      "id": "23",
-      "url": "https://www.moneycontrol.com/markets/indian-indices/top-nsebank-companies-list/23?classic=true",
-      "name": "NIFTY BANK"
     },
     {
       "id": "38",

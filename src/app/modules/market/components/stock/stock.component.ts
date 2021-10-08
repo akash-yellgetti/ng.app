@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Market } from '../../core/json/market';
 import { MarketService } from '../../core/services/api/market/market.service';
-
 declare const $: any;
 @Component({
   selector: 'app-stock',
