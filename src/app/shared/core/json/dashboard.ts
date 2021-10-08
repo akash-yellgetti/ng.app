@@ -132,12 +132,12 @@ export const IndexDashboard = {
                 timeout: 0,
                 headers: {},
                 dataSrc: function (json: any) {
-                    const data = [];
+                    const data: any = [];
                     const { c, h, l, o, s, t, v } = json;
                     for (const i in c) {
                         if (c[i]) {
                             const timestamp = timeConverter(t[i]);
-                            const d = {
+                            const d: any = {
                                 open: o[i],
                                 high: h[i],
                                 low: l[i],

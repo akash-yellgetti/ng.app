@@ -61,7 +61,10 @@ export const Market = {
                     { "data": "sc_id", "title": "ID" },
                     { "data": "sc_sector", "title": "sc_sector" }
                     
-                ]
+                ],
+                "initComplete": function(settings: any, json: any) {
+                    alert( 'DataTables has finished its initialisation.' );
+                  }
             },
         }
     }
