@@ -9,13 +9,15 @@ const optionDatatableSettings = {
         columns: [
             // { "data": "fno_exp", "title": "fno_exp" },
             { "data": "strikeprice", "title": "strikeprice" },
+            { "data": "name", "title": "name" },
             { "data": "lastvalue", "title": "lastvalue" },
             { "data": "percentchange", "title": "percentchange" },
-            { "data": "direction", "title": "direction" },
-            { "data": "oi_change", "title": "oi_change" },
             { "data": "oi_percchg", "title": "oi_percchg" },
+            // { "data": "direction", "title": "direction" },
+            // { "data": "oi_change", "title": "oi_change" },
             // { "data": "last_traded_date", "title": "last_traded_date" },
-            { "data": "volume", "title": "volume" }
+            // { "data": "volume", "title": "volume" }
+            
         ]
     }
 }

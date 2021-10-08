@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
+import { optionCondiitons } from '../../../json/optionConditions';
+import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
@@ -111,6 +112,16 @@ export class MarketService {
       .pipe(map((data) => data),
         catchError((err) => this.handleError(err, 'Failed to fetch information.')));
   }
+
+  getPositionName = (option, type) => {
+    // const o = _.get(option, type);
+    const price = Math.sign(parseFloat(_.replace(option.percentchange, '%', ''))) === -1 ? 'negative' : 'positive';
+    const changeinOpenInterest = Math.sign(parseFloat(_.replace(option.oi_percchg, '%', ''))) === -1 ? 'negative' : 'positive';
+    const conditions = _.filter(optionCondiitons, (res) => {
+        return _.indexOf(res.types, type) > -1;
+    });
+    return _.find(conditions, { price, changeinOpenInterest });
+  };
 
   private handleError(error: any, where: any): any {
     // this.toastr.error(error.message);

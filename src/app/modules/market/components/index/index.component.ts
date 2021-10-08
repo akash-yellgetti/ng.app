@@ -64,29 +64,37 @@ export class IndexComponent implements OnInit {
       ];
 
       const strikeprice = row.id == 23 ? 37800 : 17900;
-
+      const self = this;
       Promise.all(promises).then((resp) => {
         // console.log(resp);
         const callOptions = _.get(resp[0], 'fno_list.item');
         const putOptions = _.get(resp[1], 'fno_list.item');
         const otmCall = _.chain(callOptions).filter((r) => {
           return strikeprice < parseInt(r.strikeprice);
-        }).take(10).value();
-        this.resetDatableData(this.index.otmCallDatatable.table, otmCall);
+        }).take(10).map((d) => {
+          return _.extend(d, self.marketService.getPositionName(d, 'CE'));
+        }).value();
         console.log('otmCall', otmCall);
+        this.resetDatableData(this.index.otmCallDatatable.table, otmCall);
         const otmPut = _.chain(putOptions).filter((r) => {
           return strikeprice > parseInt(r.strikeprice);
-        }).orderBy(['strikeprice'], ['desc']).take(10).value();
+        }).orderBy(['strikeprice'], ['desc']).take(10).map((d) => {
+          return _.extend(d, self.marketService.getPositionName(d, 'PE'));
+        }).value();
         console.log('otmPut', otmPut);
         this.resetDatableData(this.index.otmPutDatatable.table, otmPut);
         const itmCall = _.chain(callOptions).filter((r) => {
           return strikeprice > parseInt(r.strikeprice);
-        }).orderBy(['strikeprice'], ['desc']).take(10).value();
+        }).orderBy(['strikeprice'], ['desc']).take(10).map((d) => {
+          return _.extend(d, self.marketService.getPositionName(d, 'CE'));
+        }).value();
         console.log('itmCall', itmCall);
         this.resetDatableData(this.index.itmCallDatatable.table, itmCall);
         const itmPut = _.chain(putOptions).filter((r) => {
           return strikeprice < parseInt(r.strikeprice);
-        }).take(10).value();
+        }).take(10).map((d) => {
+          return _.extend(d, self.marketService.getPositionName(d, 'PE'));
+        }).value();
         console.log('itmPut', itmPut);
         this.resetDatableData(this.index.itmPutDatatable.table, itmPut);
       })
