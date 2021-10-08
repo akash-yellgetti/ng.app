@@ -63,7 +63,7 @@ export const Market = {
                     
                 ],
                 "initComplete": function(settings: any, json: any) {
-                    alert( 'DataTables has finished its initialisation.' );
+                    // alert( 'DataTables has finished its initialisation.' );
                   }
             },
         }
