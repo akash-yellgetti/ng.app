@@ -48,6 +48,7 @@ export class StockComponent implements OnInit {
     this.marketService.info(row.sc_id).subscribe((res) => {
       const data = res.data;
       console.log(data);
+      this.stock.info = data;
       
     })
   }

@@ -31,6 +31,7 @@ export const Market = {
         }
     },
     stock: {
+        info: {},
         listDatatable: {
             id: "listDatatable",
             table: {},
