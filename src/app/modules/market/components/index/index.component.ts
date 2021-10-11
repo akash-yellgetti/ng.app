@@ -64,6 +64,8 @@ export class IndexComponent implements OnInit {
       ];
 
       const strikeprice = row.id == 23 ? 37800 : 17900;
+      console.log(striprice);
+      
       const self = this;
       Promise.all(promises).then((resp) => {
         // console.log(resp);
