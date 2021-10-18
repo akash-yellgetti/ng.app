@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { result } from 'lodash';
+import * as moment from 'moment';
 declare const $: any;
 
 
@@ -96,7 +96,7 @@ export const Market = {
             options: {
                 responsive: true,
                 ajax: {
-                    url: "/assets/json/nifty-500-stocks.json",
+                    url: "/assets/json/stocks.json",
                     method: "GET",
                     cache: true,
                     timeout: 0,
@@ -132,7 +132,14 @@ export const Market = {
                 columns: [
                     { "data": "isinid", "title": "ISIN Code" },
                     { "data": "symbol", "title": "Symbol" },
-                    { "data": "companyName", "title": "Company Name" },
+                    { "data": "nameOfCompany", "title": "Company Name" },
+                    { "data": "dateOfListing" , "title": "Date Of Listing", "type":  "date", 
+                    //     "render": function (data, type, row) {
+                    //     data = moment(data).format('DD MMM YYYY');
+                    //     return data;
+                    // }
+
+                    },
                     { "data": "sc_id", "title": "ID" },
                     { "data": "sc_sector", "title": "sc_sector" },
                     { "data": "pricepercentchange", "title": "CHG.P" },
@@ -152,31 +159,29 @@ export const Market = {
                     var tableApi = this.api();
                     var elem = $(this);
                     
-                    // const data = elem.rows().data().toArray();
+                    const data = tableApi.rows().data().toArray();
                     // console.log(data);
                     const promises = [];
-                    const data = tableApi.table().rows().data();
-                    _.each(data, (res) => { 
-                        promises.push(ajax(res.sc_id));
+                    const chunks = _.chunk(data, 150);
+                    _.each(chunks, (chunk, i: any) => { 
+                        _.delay(() => {
+                            _.each(chunk, (res: any) => {
+                                promises.push(ajax(res.sc_id));
+                            });
+                        }, 2000 * (i + 1), i);
                     });
                     
+                    _.delay(() => {
+                        Promise.all(promises).then((result) => {
+                            const newData = _.chain(result).mapValues('data').values().value();
+                            const mergedData = _.values(_.merge(_.keyBy(data, 'sc_id'), _.keyBy(newData, 'symbol')))
+                            // console.log(mergedData);
+                            tableApi.clear();
+                            tableApi.rows.add(mergedData);
+                            tableApi.draw();
+                        })
 
-                    Promise.all(promises).then((result) => {
-                        const newData = _.chain(result).mapValues('data').values().value();
-                        const mergedData = _.map(_.values(_.merge(_.keyBy(data, 'isinid'), _.keyBy(newData, 'isinid'))), (r) => {
-                            _.set(r, 'symbol', _.get(r, 'NSEID', null));
-                            return r;
-                        });
-                        console.log(mergedData);
-                        
-
-                        tableApi.clear();
-                        tableApi.rows.add(data);
-                        tableApi.draw();
-
-                    })
-
-                    
+                    }, 2500 * (_.size(chunks) + 1), _.size(chunks));
                     // alert( 'DataTables has finished its initialisation.' );
                 }
             },
