@@ -35,6 +35,8 @@ export class StockComponent implements OnInit {
   listDatatableEvt = ($event: any) => {
     const table = $event;
     this.stock.listDatatable.table = table;
+    
+
     const self = this;
     const elem: any = $('#'+this.stock.listDatatable.id).on('click', 'tbody tr', function() {
       const row = table.row($(this)).data();
@@ -43,6 +45,11 @@ export class StockComponent implements OnInit {
   }
 
   selectedRow = (row: any) => {
+
+    
+var data =$('#'+this.stock.listDatatable.id).DataTable().rows().data().toArray();
+console.log(data);
+
     console.log(row);
     this.marketService.info(row.sc_id).subscribe((res) => {
       const data = res.data;
