@@ -162,7 +162,7 @@ export const Market = {
 
                     Promise.all(promises).then((result) => {
                         const newData = _.chain(result).mapValues('data').values().value();
-                        const mergedData = _.values(_.merge(_.keyBy(data, 'isinid'), _.keyBy(newData, 'isinid')));
+                        const mergedData = _.values(_.merge(_.keyBy(newData, 'isinid'), _.keyBy(data, 'isinid')));
                         console.log(mergedData);
                         
 
