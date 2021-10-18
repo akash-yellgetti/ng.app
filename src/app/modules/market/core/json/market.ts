@@ -135,10 +135,11 @@ export const Market = {
                     { "data": "companyName", "title": "Company Name" },
                     { "data": "sc_id", "title": "ID" },
                     { "data": "sc_sector", "title": "sc_sector" },
-                    { "data": "pricepercentchange", "title": "pricepercentchange" },
-                    { "data": "priceprevclose", "title": "priceprevclose" },
-                    { "data": "pricecurrent", "title": "pricecurrent" },
-                    { "data": "AVGP", "title": "AVGP" },
+                    { "data": "pricepercentchange", "title": "CHG.P" },
+                    { "data": "priceprevclose", "title": "PREV.P" },
+                    { "data": "pricecurrent", "title": "CUR.P" },
+                    { "data": "AVGP", "title": "AVG.P" },
+
                     { "data": "OPN", "title": "OPN" },
                     { "data": "HP", "title": "HP" },
                     { "data": "LP", "title": "LP" },
@@ -162,7 +163,10 @@ export const Market = {
 
                     Promise.all(promises).then((result) => {
                         const newData = _.chain(result).mapValues('data').values().value();
-                        const mergedData = _.values(_.merge(_.keyBy(newData, 'isinid'), _.keyBy(data, 'isinid')));
+                        const mergedData = _.map(_.values(_.merge(_.keyBy(data, 'isinid'), _.keyBy(newData, 'isinid'))), (r) => {
+                            _.set(r, 'symbol', _.get(r, 'NSEID', null));
+                            return r;
+                        });
                         console.log(mergedData);
                         
 
