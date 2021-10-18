@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Market } from '../../core/json/market';
 import { MarketService } from '../../core/services/api/market/market.service';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 declare const $: any;
 @Component({
   selector: 'app-index',
@@ -49,11 +50,12 @@ export class IndexComponent implements OnInit {
 
   selectedRow = (row: any) => {
     console.log(row);
+    const today = moment();
     this.marketService.indexInfo(row.detailId).subscribe(async (res) => {
       const data = res.data;
       console.log(data);
       this.index.info = data;
-      const expiryDate = '2021-10-14';
+      const expiryDate = today.isoWeekday(4).format('Y-M-D');;
       // const callOptions = await this.marketService.furtureOptions(row.id, 'CE', expiryDate).toPromise();
       // const putOptions = await this.marketService.furtureOptions(row.id, 'CE', expiryDate).toPromise();
       // console.log(callOptions);
@@ -64,7 +66,7 @@ export class IndexComponent implements OnInit {
       ];
 
       const strikeprice = row.id == 23 ? 37800 : 17900;
-      console.log(striprice);
+      console.log(strikeprice);
       
       const self = this;
       Promise.all(promises).then((resp) => {

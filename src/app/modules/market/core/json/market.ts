@@ -1,5 +1,24 @@
 import * as _ from 'lodash';
+import { result } from 'lodash';
+declare const $: any;
 
+
+  
+
+  function ajax(sc_id) {
+	return new Promise(function(resolve, reject) {
+		const ajaxSetting = {
+            "url": "https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/"+sc_id,
+            "method": "GET",
+            "headers": {},
+        };
+
+        $.ajax(ajaxSetting).done(function (response) {
+            return resolve(response)
+        });
+	});
+}
+  
 
 const optionDatatableSettings = {
     table: {},
@@ -21,6 +40,7 @@ const optionDatatableSettings = {
         ]
     }
 }
+
 
 export const Market = {
     index: {
@@ -81,20 +101,32 @@ export const Market = {
                     cache: true,
                     timeout: 0,
                     headers: {},
-                    dataSrc: function (json: any) {
-                        console.log(json);
-
+                    dataSrc:  (json: any) => {
+                        // console.log(json);
+                        const promises = [];
                         const data = _.map(_.get(json, 'data'), (res) => {
                             _.set(res, 'sc_sector', _.get(res, 'sc_sector', null));
+                            // const settings = _.cloneDeep(ajaxSetting);
+                            // settings.url = settings.url+res.sc_id;
+                            promises.push(ajax(res.sc_id))
                             return res;
                         });
+
+                        Promise.all(promises).then((result) => {
+                            const resultData = _.chain(result).mapValues('data').values().unionBy(data, 'isinid').value();
+                            console.log(resultData);
+                            return data;
+                        });
+                        
+                        
                         return data;
+                        
                     }
                 },
                 pageLength: 10,
                 processing: true,
                 columns: [
-                    { "data": "ISINCode", "title": "ISIN Code" },
+                    { "data": "isinid", "title": "ISIN Code" },
                     { "data": "symbol", "title": "Symbol" },
                     { "data": "companyName", "title": "Company Name" },
                     { "data": "sc_id", "title": "ID" },
