@@ -106,17 +106,17 @@ export const Market = {
                     dataSrc:  (json: any) => {
                         // console.log(json);
                         // const promises = [];
-                        let data = _.map(_.get(json, 'data'), (res) => {
-                            _.set(res, 'sc_sector', _.get(res, 'sc_sector', null));
-                            _.set(res, 'priceprevclose', _.get(res, 'priceprevclose', null));
-                            _.set(res, 'pricecurrent', _.get(res, 'pricecurrent', null));
-                            _.set(res, 'pricepercentchange', _.get(res, 'pricepercentchange', null));
-                            _.set(res, 'AVGP', _.get(res, 'AVGP', null));
-                            _.set(res, 'OPN', _.get(res, 'OPN', null));
-                            _.set(res, 'HP', _.get(res, 'HP', null));
-                            _.set(res, 'LP', _.get(res, 'LP', null));
-                            _.set(res, '52H', _.get(res, '52H', null));
-                            _.set(res, '52L', _.get(res, '52L', null));
+                        let data = _.map(json, (res) => {
+                            // _.set(res, 'sc_sector', _.get(res, 'sc_sector', null));
+                            // _.set(res, 'priceprevclose', _.get(res, 'priceprevclose', null));
+                            // _.set(res, 'pricecurrent', _.get(res, 'pricecurrent', null));
+                            // _.set(res, 'pricepercentchange', _.get(res, 'pricepercentchange', null));
+                            // _.set(res, 'AVGP', _.get(res, 'AVGP', null));
+                            // _.set(res, 'OPN', _.get(res, 'OPN', null));
+                            // _.set(res, 'HP', _.get(res, 'HP', null));
+                            // _.set(res, 'LP', _.get(res, 'LP', null));
+                            // _.set(res, '52H', _.get(res, '52H', null));
+                            // _.set(res, '52L', _.get(res, '52L', null));
                             
                             return res;
                         });
@@ -132,7 +132,7 @@ export const Market = {
                 pageLength: 10,
                 processing: true,
                 columns: [
-                    { "data": "isinid", "title": "ISIN Code" },
+                    { "data": "isinNumber", "title": "ISIN Code" },
                     { "data": "symbol", "title": "Symbol" },
                     { "data": "nameOfCompany", "title": "Company Name" },
                     { "data": "dateOfListing" , "title": "Date Of Listing", "type":  "date", 
@@ -142,18 +142,18 @@ export const Market = {
                     // }
 
                     },
-                    { "data": "sc_id", "title": "ID" },
-                    { "data": "sc_sector", "title": "sc_sector" },
-                    { "data": "pricepercentchange", "title": "CHG.P", "type": "num"},
-                    { "data": "priceprevclose", "title": "PREV.P", "type": "num"},
-                    { "data": "pricecurrent", "title": "CUR.P", "type": "num"},
-                    { "data": "AVGP", "title": "AVG.P", "type": "num"},
+                    // { "data": "sc_id", "title": "ID" },
+                    // { "data": "sc_sector", "title": "sc_sector" },
+                    // { "data": "pricepercentchange", "title": "CHG.P", "type": "num"},
+                    // { "data": "priceprevclose", "title": "PREV.P", "type": "num"},
+                    // { "data": "lastPrice", "title": "CUR.P", "type": "num"},
+                    // { "data": "basePrice", "title": "AVG.P", "type": "num"},
 
-                    { "data": "OPN", "title": "OPN", "type": "num"},
-                    { "data": "HP", "title": "HP", "type": "num"},
-                    { "data": "LP", "title": "LP", "type": "num"},
-                    { "data": "52H", "title": "52H", "type": "num"},
-                    { "data": "52L", "title": "52L", "type": "num"}
+                    // { "data": "open", "title": "OPN", "type": "num"},
+                    // { "data": "dayHigh", "title": "HP", "type": "num"},
+                    // { "data": "dayLow", "title": "LP", "type": "num"},
+                    // { "data": "high52", "title": "52H", "type": "num"},
+                    // { "data": "low52", "title": "52L", "type": "num"}
 
                 ],
                 "initComplete": function (settings: any, json: any) {
@@ -161,33 +161,33 @@ export const Market = {
                     var tableApi = this.api();
                     var elem = $(this);
                     
-                    const data = tableApi.rows().data().toArray();
-                    // console.log(data);
-                    const promises = [];
-                    const chunks = _.chunk(data, 100);
-                    _.each(chunks, (chunk, i: any) => { 
-                        _.delay(() => {
-                            _.each(chunk, (res: any) => {
-                                promises.push(ajax(res.sc_id));
-                            });
-                        }, 2500 * (i + 1), i);
-                    });
+                    // const data = tableApi.rows().data().toArray();
+                    // // console.log(data);
+                    // const promises = [];
+                    // const chunks = _.chunk(data, 100);
+                    // _.each(chunks, (chunk, i: any) => { 
+                    //     _.delay(() => {
+                    //         _.each(chunk, (res: any) => {
+                    //             promises.push(ajax(res.sc_id));
+                    //         });
+                    //     }, 2500 * (i + 1), i);
+                    // });
                     
-                    _.delay(() => {
-                        Promise.all(promises).then((result) => {
-                            const newData = _.chain(result).mapValues('data').values().value();
-                            const mergedData = _.orderBy(_.values(_.merge(_.keyBy(data, 'sc_id'), _.keyBy(newData, 'symbol'))), ['pricecurrent'], ['asc'])
-                            // console.log(mergedData);
-                            tableApi.clear();
+                    // _.delay(() => {
+                    //     Promise.all(promises).then((result) => {
+                    //         const newData = _.chain(result).mapValues('data').values().value();
+                    //         const mergedData = _.orderBy(_.values(_.merge(_.keyBy(data, 'sc_id'), _.keyBy(newData, 'symbol'))), ['pricecurrent'], ['asc'])
+                    //         // console.log(mergedData);
+                    //         tableApi.clear();
 
-                            tableApi.rows.add(mergedData);
-                            // tableApi.sort([3, 'desc']);
-                            // console.log();
+                    //         tableApi.rows.add(mergedData);
+                    //         // tableApi.sort([3, 'desc']);
+                    //         // console.log();
                             
-                            tableApi.order( [[ 3, 'desc' ], [ 8, 'asc' ]] ).draw();
-                        })
+                    //         tableApi.order( [[ 3, 'desc' ], [ 8, 'asc' ]] ).draw();
+                    //     })
 
-                    }, 3000 * (_.size(chunks) + 1), _.size(chunks));
+                    // }, 3000 * (_.size(chunks) + 1), _.size(chunks));
                     // alert( 'DataTables has finished its initialisation.' );
                 }
             },
