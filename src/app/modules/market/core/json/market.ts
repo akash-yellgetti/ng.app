@@ -23,6 +23,7 @@ declare const $: any;
 const optionDatatableSettings = {
     table: {},
     options: {
+        dom: 'Qlfrtip',
         responsive: true,
         data: [],
         columns: [
@@ -94,6 +95,7 @@ export const Market = {
             id: "listDatatable",
             table: {},
             options: {
+                dom: 'Qlfrtip',
                 responsive: true,
                 ajax: {
                     url: "/assets/json/stocks.json",
@@ -142,16 +144,16 @@ export const Market = {
                     },
                     { "data": "sc_id", "title": "ID" },
                     { "data": "sc_sector", "title": "sc_sector" },
-                    { "data": "pricepercentchange", "title": "CHG.P" },
-                    { "data": "priceprevclose", "title": "PREV.P" },
-                    { "data": "pricecurrent", "title": "CUR.P" },
-                    { "data": "AVGP", "title": "AVG.P" },
+                    { "data": "pricepercentchange", "title": "CHG.P", "type": "num"},
+                    { "data": "priceprevclose", "title": "PREV.P", "type": "num"},
+                    { "data": "pricecurrent", "title": "CUR.P", "type": "num"},
+                    { "data": "AVGP", "title": "AVG.P", "type": "num"},
 
-                    { "data": "OPN", "title": "OPN" },
-                    { "data": "HP", "title": "HP" },
-                    { "data": "LP", "title": "LP" },
-                    { "data": "52H", "title": "52H" },
-                    { "data": "52L", "title": "52L" }
+                    { "data": "OPN", "title": "OPN", "type": "num"},
+                    { "data": "HP", "title": "HP", "type": "num"},
+                    { "data": "LP", "title": "LP", "type": "num"},
+                    { "data": "52H", "title": "52H", "type": "num"},
+                    { "data": "52L", "title": "52L", "type": "num"}
 
                 ],
                 "initComplete": function (settings: any, json: any) {
@@ -162,26 +164,30 @@ export const Market = {
                     const data = tableApi.rows().data().toArray();
                     // console.log(data);
                     const promises = [];
-                    const chunks = _.chunk(data, 150);
+                    const chunks = _.chunk(data, 100);
                     _.each(chunks, (chunk, i: any) => { 
                         _.delay(() => {
                             _.each(chunk, (res: any) => {
                                 promises.push(ajax(res.sc_id));
                             });
-                        }, 2000 * (i + 1), i);
+                        }, 2500 * (i + 1), i);
                     });
                     
                     _.delay(() => {
                         Promise.all(promises).then((result) => {
                             const newData = _.chain(result).mapValues('data').values().value();
-                            const mergedData = _.values(_.merge(_.keyBy(data, 'sc_id'), _.keyBy(newData, 'symbol')))
+                            const mergedData = _.orderBy(_.values(_.merge(_.keyBy(data, 'sc_id'), _.keyBy(newData, 'symbol'))), ['pricecurrent'], ['asc'])
                             // console.log(mergedData);
                             tableApi.clear();
+
                             tableApi.rows.add(mergedData);
-                            tableApi.draw();
+                            // tableApi.sort([3, 'desc']);
+                            // console.log();
+                            
+                            tableApi.order( [[ 3, 'desc' ], [ 8, 'asc' ]] ).draw();
                         })
 
-                    }, 2500 * (_.size(chunks) + 1), _.size(chunks));
+                    }, 3000 * (_.size(chunks) + 1), _.size(chunks));
                     // alert( 'DataTables has finished its initialisation.' );
                 }
             },

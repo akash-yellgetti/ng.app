@@ -35,15 +35,21 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./src/assets/datatable/css/searchBuilder.dataTables.min.css",
+              "./src/assets/datatable/css/dataTables.dateTime.min.css",
               "./src/styles.scss"
             ],
             "scripts": [
               "./src/assets/js/jquery.min.js",
               "./src/assets/js/bootstrap.min.js",
+              "./node_modules/moment/min/moment.min.js",
               "./src/assets/datatable/js/jquery.dataTables.min.js",
               "./src/assets/datatable/js/dataTables.bootstrap.min.js",
               "./src/assets/datatable/js/dataTables.rowReorder.min.js",
-              "./src/assets/datatable/js/dataTables.responsive.min.js"
+              "./src/assets/datatable/js/dataTables.responsive.min.js",
+              "./src/assets/datatable/js/dataTables.searchBuilder.min.js",
+              "./src/assets/datatable/js/dataTables.dateTime.min.js",
+              "./src/assets/datatable/js/datetime-moment.js"
             ]
           },
           "configurations": {
