@@ -109,14 +109,13 @@ export const Market = {
                         let data = _.map(json, (res) => {
                             // _.set(res, 'sc_sector', _.get(res, 'sc_sector', null));
                             // _.set(res, 'priceprevclose', _.get(res, 'priceprevclose', null));
-                            // _.set(res, 'pricecurrent', _.get(res, 'pricecurrent', null));
-                            // _.set(res, 'pricepercentchange', _.get(res, 'pricepercentchange', null));
-                            // _.set(res, 'AVGP', _.get(res, 'AVGP', null));
-                            // _.set(res, 'OPN', _.get(res, 'OPN', null));
-                            // _.set(res, 'HP', _.get(res, 'HP', null));
-                            // _.set(res, 'LP', _.get(res, 'LP', null));
-                            // _.set(res, '52H', _.get(res, '52H', null));
-                            // _.set(res, '52L', _.get(res, '52L', null));
+                            _.set(res, 'lastPrice', _.get(res, 'lastPrice', ''));
+                            _.set(res, 'basePrice', _.get(res, 'basePrice', ''));
+                            _.set(res, 'open', _.get(res, 'open', ''));
+                            _.set(res, 'dayHigh', _.get(res, 'dayHigh', ''));
+                            _.set(res, 'dayLow', _.get(res, 'dayLow', ''));
+                            _.set(res, 'high52', _.get(res, 'high52', ''));
+                            _.set(res, 'low52', _.get(res, 'low52', ''));
                             
                             return res;
                         });
@@ -136,24 +135,51 @@ export const Market = {
                     { "data": "symbol", "title": "Symbol" },
                     { "data": "nameOfCompany", "title": "Company Name" },
                     { "data": "dateOfListing" , "title": "Date Of Listing", "type":  "date", 
-                    //     "render": function (data, type, row) {
-                    //     data = moment(data).format('DD MMM YYYY');
-                    //     return data;
-                    // }
+                        "render": function (data, type, row) {
+                        data = moment(data).format('DD-MMM-YYYY');
+                        return data;
+                    }
 
                     },
                     // { "data": "sc_id", "title": "ID" },
                     // { "data": "sc_sector", "title": "sc_sector" },
                     // { "data": "pricepercentchange", "title": "CHG.P", "type": "num"},
                     // { "data": "priceprevclose", "title": "PREV.P", "type": "num"},
-                    // { "data": "lastPrice", "title": "CUR.P", "type": "num"},
-                    // { "data": "basePrice", "title": "AVG.P", "type": "num"},
-
-                    // { "data": "open", "title": "OPN", "type": "num"},
-                    // { "data": "dayHigh", "title": "HP", "type": "num"},
-                    // { "data": "dayLow", "title": "LP", "type": "num"},
-                    // { "data": "high52", "title": "52H", "type": "num"},
-                    // { "data": "low52", "title": "52L", "type": "num"}
+                    {   "data": "lastPrice", "title": "CUR.P", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
+                    { "data": "basePrice", "title": "AVG.P", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
+                    { "data": "open", "title": "OPN", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
+                    { "data": "dayHigh", "title": "HP", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
+                    { "data": "dayLow", "title": "LP", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
+                    { "data": "high52", "title": "52H", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
+                    { "data": "low52", "title": "52L", "type": "num",
+                        "render": function (data, type, row) {
+                            return parseFloat(data.replace(/,/g, ''));
+                        }
+                    },
 
                 ],
                 "initComplete": function (settings: any, json: any) {

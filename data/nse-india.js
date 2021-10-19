@@ -3,15 +3,16 @@ const XLSX = require('xlsx');
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
-const filepath = path.join('stocks.json');
+const stockPath = path.join('stocks.json');
+const filepath = path.join('../src/assets/json/stocks.json');
 // const stocks = fs.existsSync(filepath) ? JSON.parse(fs.readFileSync(filepath, 'utf8')) : {};
 
 const api = (symbol) => {
   const setting = {
-    url: 'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=' + encodeURIComponent(symbol),
+    url: 'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/ajaxGetQuoteJSON.jsp?series=EQ&symbol=' + symbol,
     method: 'get',
     headers: {
-      Referer: 'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + encodeURIComponent(symbol),
+      Referer: 'https://www1.nseindia.com/live_market/dynaContent/live_watch/get_quote/GetQuote.jsp?symbol=' + symbol,
       'X-Requested-With': 'XMLHttpRequest'
     }
   }
@@ -61,11 +62,11 @@ axios(config)
         const data = _.chain(result).mapValues('data.data').values().flatten().value();
         console.log(data);
         const mergedData = _.values(_.merge(_.keyBy(stocks, 'symbol'), _.keyBy(data, 'symbol')))
-        fs.writeFileSync(path.join('../src/assets/json/stocks.json'), JSON.stringify(mergedData, null, 2), 'utf8');
+        fs.writeFileSync(filepath, JSON.stringify(mergedData, null, 2), 'utf8');
       });
     }, time, 1)
 
-// fs.writeFileSync(filepath, JSON.stringify(stocks, null, 2), 'utf8');
+    // fs.writeFileSync(filepath, JSON.stringify(stocks, null, 2), 'utf8');
 
     
 })
