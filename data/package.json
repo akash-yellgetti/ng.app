@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.23.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "xlsx": "^0.17.3"
   }
 }

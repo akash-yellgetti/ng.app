@@ -3,8 +3,8 @@ const XLSX = require('xlsx');
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
-const stockPath = path.join('stocks.json');
-const filepath = path.join('../src/assets/json/stocks.json');
+const filepath = path.join('stocks.json');
+// const filepath = path.join('../src/assets/json/stocks.json');
 // const stocks = fs.existsSync(filepath) ? JSON.parse(fs.readFileSync(filepath, 'utf8')) : {};
 
 const api = (symbol) => {
