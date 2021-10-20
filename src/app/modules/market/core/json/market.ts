@@ -128,17 +128,19 @@ export const Market = {
                         
                     }
                 },
+                order: [[ 12, "desc" ], [ 3, "desc" ]],
                 pageLength: 10,
                 processing: true,
                 columns: [
                     { "data": "isinNumber", "title": "ISIN Code" },
                     { "data": "symbol", "title": "Symbol" },
                     { "data": "nameOfCompany", "title": "Company Name" },
+                    { "data": "dateOfListingTimeSecond" , "title": "Date Of Listing T"},
                     { "data": "dateOfListing" , "title": "Date Of Listing", "type":  "date", 
                         "render": function (data, type, row) {
-                        data = moment(data).format('DD-MMM-YYYY');
-                        return data;
-                    }
+                            data = moment(data).format('DD-MMM-YYYY');
+                            return data;
+                        }
 
                     },
                     // { "data": "sc_id", "title": "ID" },
@@ -146,40 +148,41 @@ export const Market = {
                     // { "data": "pricepercentchange", "title": "CHG.P", "type": "num"},
                     // { "data": "priceprevclose", "title": "PREV.P", "type": "num"},
                     {   "data": "lastPrice", "title": "CUR.P", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                        // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
                     { "data": "basePrice", "title": "AVG.P", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                        // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
                     { "data": "open", "title": "OPN", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                        // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
                     { "data": "dayHigh", "title": "HP", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                        // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
                     { "data": "dayLow", "title": "LP", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                        // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
                     { "data": "high52", "title": "52H", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                        // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
                     { "data": "low52", "title": "52L", "type": "num",
-                        "render": function (data, type, row) {
-                            return parseFloat(data.replace(/,/g, ''));
-                        }
+                    // "render": function (data, type, row) {
+                        //     return parseFloat(data.replace(/,/g, ''));
+                        // }
                     },
+                    { "data": "remainingPotenial", "title": "remainingPotenial", "type": "num" }
 
                 ],
                 "initComplete": function (settings: any, json: any) {

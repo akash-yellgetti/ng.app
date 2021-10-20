@@ -32,6 +32,14 @@ const max = 20;
 
 const newStocks = _.chain(stocks).map(r => {
     const d =_.pick(r, fields);
+    _.set(d, 'faceValue', parseFloat(_.replace(_.get(r, 'faceValue'), /,/g, '')));
+    _.set(d, 'basePrice', parseFloat(_.replace(_.get(r, 'basePrice'), /,/g, '')));
+    _.set(d, 'pricebandlower', parseFloat(_.replace(_.get(r, 'pricebandlower'), /,/g, '')));
+    _.set(d, 'pricebandupper', parseFloat(_.replace(_.get(r, 'pricebandupper'), /,/g, '')));
+    _.set(d, 'priceBand', parseFloat(_.replace(_.get(r, 'priceBand'), /,/g, '')));
+    _.set(d, 'open', parseFloat(_.replace(_.get(r, 'open'), /,/g, '')));
+    _.set(d, 'dayHigh', parseFloat(_.replace(_.get(r, 'dayHigh'), /,/g, '')));
+    _.set(d, 'dayLow', parseFloat(_.replace(_.get(r, 'dayLow'), /,/g, '')));
     _.set(d, 'low52', parseFloat(_.replace(_.get(r, 'low52'), /,/g, '')));
     _.set(d, 'high52', parseFloat(_.replace(_.get(r, 'high52'), /,/g, '')));
     _.set(d, 'lastPrice', parseFloat(_.replace(_.get(r, 'lastPrice'), /,/g, '')));
@@ -42,9 +50,10 @@ const newStocks = _.chain(stocks).map(r => {
     _.set(d, 'remainingPotenial',  parseFloat((100-_.get(d, 'coveredPotenial'))));
 
     return d;
-}).filter((r) => {
-    return min < parseFloat(_.replace(_.get(r, 'averagePrice'), /,/g, '')) &&  parseFloat(_.replace(_.get(r, 'averagePrice'), /,/g, '')) <= max;
 })
+// .filter((r) => {
+//     return min < parseFloat(_.replace(_.get(r, 'averagePrice'), /,/g, '')) &&  parseFloat(_.replace(_.get(r, 'averagePrice'), /,/g, '')) <= max;
+// })
 // .sortBy((d) => {
 //     return new Date(d.dateOfListing);
 // })
@@ -52,7 +61,7 @@ const newStocks = _.chain(stocks).map(r => {
 .value();
 
 
-// fs.writeFileSync(analysisFilepath, JSON.stringify(newStocks, null, 2), 'utf8');
+fs.writeFileSync(analysisFilepath, JSON.stringify(newStocks, null, 2), 'utf8');
 
 // console.log(newStocks);
 
