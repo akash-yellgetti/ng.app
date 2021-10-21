@@ -47,7 +47,7 @@ const newStocks = _.chain(stocks).map(r => {
     _.set(d, 'dateOfListingTimeSecond', moment(_.get(r, 'dateOfListing'), "MMDDYYYY").valueOf());
     _.set(d, 'dateOfListing', moment(_.get(r, 'dateOfListing')).format("DD-MMM-YYYY"));
     _.set(d, 'coveredPotenial',  parseFloat(((_.get(d, 'lastPrice')/_.get(d, 'high52'))*100).toFixed(2)));
-    _.set(d, 'remainingPotenial',  parseFloat((100-_.get(d, 'coveredPotenial'))));
+    _.set(d, 'remainingPotenial',  parseFloat((100-_.get(d, 'coveredPotenial'))).toFixed(2) );
 
     return d;
 })
