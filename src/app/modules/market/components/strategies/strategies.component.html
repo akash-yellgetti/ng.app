@@ -1,0 +1,63 @@
+<div class="grid-container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Strategies Works! {{ strategies.account.amount | numberToWords }} </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="usr">Stock Price:</label>
+                                <input type="text" class="form-control" [(ngModel)]="strategies.stock.price">
+                              </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="usr">Account Amount:</label>
+                                <input type="text" class="form-control" [(ngModel)]="strategies.account.amount">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default" (click)="calculate()">Calculate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3" *ngFor="let stopLoss of strategies.stock.stopLosses;" >
+            <div class="panel panel-default">
+                <div class="panel-heading">Calculate Strategies Works!</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="usr">Stock StopLoss Percent:</label>
+                                <input type="text" class="form-control" [(ngModel)]="stopLoss.lossPercent"  readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="usr">Stock StopLoss Amount:</label>
+                                <input type="text" class="form-control" [(ngModel)]="stopLoss.lossAmount"  readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="usr">Stock Profit Percent:</label>
+                                <input type="text" class="form-control" [(ngModel)]="stopLoss.profitPercent"  readonly>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="usr">Stock Profit Amount:</label>
+                                <input type="text" class="form-control" [(ngModel)]="stopLoss.profitAmount"  readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

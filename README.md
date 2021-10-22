@@ -83,6 +83,8 @@ ng g m shared/modules/material --module=app --routing=true
 ng g c shared/components/datatable
 ng g c shared/components/search
 
+ng g pipe shared/core/pipe/number-to-words/NumberToWords
+
 ----------------------------------------------------
 
 ng g m modules/pathology --module=app --routing=true
@@ -90,6 +92,8 @@ ng g m modules/market --module=app --routing=true
 
 ng g c modules/market/components/index --module=market
 ng g c modules/market/components/stock --module=market
+ng g c modules/market/components/strategies --module=market
 
-ng g s modules/market/core/services/api/market/market --module=market
+ng g s modules/market/core/services/api/market/market
+ng g s modules/market/core/services/strategies/strategies
 ----------------------------------------------------

@@ -67,6 +67,7 @@ export const files = [
     children: [
       { name: 'Index', type: 'file', url: 'main/market/index' },
       { name: 'Stock', type: 'file', url: 'main/market/stock' },
+      { name: 'Strategies', type: 'file', url: 'main/market/strategies' },
     ]
   },
   {
